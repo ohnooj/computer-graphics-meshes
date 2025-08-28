@@ -63,7 +63,7 @@ target_link_libraries(obj PRIVATE core)
 
 # Warnings
 if(MSVC)
-  target_compile_options(core PRIVATE /W4 /WX)
+  target_compile_options(core PRIVATE /W4 /permissive-)
 else()
   target_compile_options(core PRIVATE -Wall -Wextra -Wpedantic)
 endif()
