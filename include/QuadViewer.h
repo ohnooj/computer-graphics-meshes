@@ -135,7 +135,7 @@ class QuadViewer
       set_mesh(vV,vUV,vNV,vF);
     }
     // Pass through to igl::opengl::glfw::Viewer::launch
-    int launch(bool resizable = true,bool fullscreen = false)
-    { return viewer.launch(resizable,fullscreen); }
+    int launch(bool fullscreen = false)
+    { return viewer.launch(fullscreen); }
 };
 #endif

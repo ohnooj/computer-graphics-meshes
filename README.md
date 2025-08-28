@@ -1,8 +1,8 @@
 # Computer Graphics – Meshes
 
 > **To get started:** Clone this repository and all its [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) dependencies using:
-> 
->     git clone --recursive https://github.com/dilevin/computer-graphics-meshes.git
+>
+>     git clone --recursive git@github.com:ohnooj/computer-graphics-meshes.git
 >
 > **Do not fork:** Clicking "Fork" will create a _public_ repository. If you'd like to use GitHub while you work on your assignment, then mirror this repo as a new _private_ repository: https://stackoverflow.com/questions/10065526/github-how-to-make-a-fork-of-public-repository-private
 
@@ -39,7 +39,7 @@ for mapping image information (e.g., colors) onto a surface (e.g., triangle
 mesh). The standard way to define a texture mapping is to augment the 3D
 geometric information of a mesh with additional 2D _parametrization_
 information: where do we find each point on the texture image plane? Typically,
-parameterization coordinates are bound to the unit square. 
+parameterization coordinates are bound to the unit square.
 
 Mapping a 3D flat polygon to 2D is rather straightforward. The problem of
 finding a good mapping from a 3D surface to 2D becomes much harder if our
@@ -56,7 +56,7 @@ Earth.
 The lack or presence of too many boundaries or the presence of "doughnut holes"
 in surfaces implies that we need to "cut" the surface to lay out it on the
 plane so all parts of the surface are "face up". _Think about trying to flatten
-a deflated basketball on the ground._ 
+a deflated basketball on the ground._
 
 ### Normals
 
@@ -76,7 +76,7 @@ stored at the corners of each triangle leads to a [smooth
 appearance](https://en.wikipedia.org/wiki/Phong_shading#Phong_interpolation).
 
 This raises the question: what normals should we put at vertices or corners of
-our mesh? 
+our mesh?
 
 For a faceted surface (e.g., a cube), all corners of a planar face <img src="/tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode&sanitize=true" align=middle width=9.81741584999999pt height=22.831056599999986pt/> should
 share the face's normal <img src="/tex/aa0f607fb8a0f302675de85aeabededc.svg?invert_in_darkmode&sanitize=true" align=middle width=59.845697999999985pt height=26.76175259999998pt/> .
@@ -101,7 +101,7 @@ incident triangles.][per-vertex-normal]
 
 For surfaces with a mixture of smooth-looking parts and creases, it is useful to
 define normals independently for each triangle corner (as opposed to each mesh
-vertex). For each corner, we'll again compute an area-weighted average of normals 
+vertex). For each corner, we'll again compute an area-weighted average of normals
 triangles incident on the shared vertex at this corner, but we'll ignore
 triangle's whose normal is too different from the corner's face's normal:
 
@@ -174,7 +174,7 @@ be defined as the [limit](https://en.wikipedia.org/wiki/Limit_(mathematics)) of
 a [recursive
 process](https://en.wikipedia.org/wiki/Recursion_(computer_science)) applied to
 a polygon: each edge of the polygon is split with a new vertex and the vertices
-are smoothed toward eachother. If you've drawn smooth curves using Adobe
+are smoothed toward each other. If you've drawn smooth curves using Adobe
 Illustrator, PowerPoint or Inkscape, then you've used splines.
 
 At a high-level, subdivision surfaces work the same way. We start with a
@@ -205,7 +205,7 @@ toward a smooth surface.](images/bob-subdivision.gif)
 graphics and computer vision research. **_Warning_:** Mesh Lab does not appear
 to respect user-provided normals in .obj files.
 
-[Autodesk Maya](https://en.wikipedia.org/wiki/Autodesk_Maya) is a commericial 3D
+[Autodesk Maya](https://en.wikipedia.org/wiki/Autodesk_Maya) is a commercial 3D
 modeling and animation software. They often have [free student
 versions](https://www.autodesk.com/education/free-software/maya).
 
@@ -223,12 +223,12 @@ This assignment uses [libigl](http://libigl.github.io) for mesh viewing. libigl
 has many mesh processing functions implemented in C++, including some of the
 functions assigned here. Do not copy or look at the following implementations:
 
-`igl::per_vertex_normals`  
-`igl::per_face_normals`  
-`igl::per_corner_normals`  
-`igl::double_area`  
-`igl::vertex_triangle_adjacency`  
-`igl::writeOBJ`  
+`igl::per_vertex_normals`
+`igl::per_face_normals`
+`igl::per_corner_normals`
+`igl::double_area`
+`igl::vertex_triangle_adjacency`
+`igl::writeOBJ`
 
 ### `src/write_obj.cpp`
 
@@ -237,7 +237,7 @@ Write a pure-triangle or pure-quad mesh with 3D vertex positions `V` and faces
 and faces `NF` to a `.obj` file.
 
 > **Note:** These _two_ function overloads represent only a small subset of
-> meshes and mesh-data that can be written to a `.obj` file. 
+> meshes and mesh-data that can be written to a `.obj` file.
 
 ### `src/cube.cpp`
 

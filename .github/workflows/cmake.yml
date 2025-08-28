@@ -1,0 +1,61 @@
+name: CMake Cross-compilation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-14, macos-13, windows-latest]
+        build_type: [Debug, Release]
+
+        # Which CMake generator to use per OS
+        include:
+          - os: ubuntu-latest
+            generator: "Unix Makefiles"
+            apt: >-
+              cmake
+              build-essential
+          - os: macos-14
+            generator: "Unix Makefiles"
+          - os: macos-13
+            generator: "Unix Makefiles"
+          - os: windows-latest
+            generator: "Visual Studio 17 2022"
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install packages (Ubuntu)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ${{ matrix.apt }}
+
+      - name: Configure
+        shell: bash
+        run: |
+          # Build common CMake args
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            cmake -S . -B build -G "${{ matrix.generator }}" -A x64
+          else
+            cmake -S . -B build -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          fi
+
+      - name: Build
+        shell: bash
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            cmake --build build --config ${{ matrix.build_type }} --parallel
+          else
+            cmake --build build --parallel
+          fi

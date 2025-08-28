@@ -33,3 +33,6 @@
 *.swp
 build/*
 *.DS_Store
+
+solution/
+.cache/
